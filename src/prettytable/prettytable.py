@@ -1864,6 +1864,9 @@ class PrettyTable:
             )
             raise ValueError(msg)
         if not self._field_names:
+            if len(row) == 0:
+                msg = "Can't infer field names from an empty row"
+                raise ValueError(msg)
             self.field_names = [f"Field {n + 1}" for n in range(len(row))]
         self._rows.append(list(row))
         self._dividers.append(divider)

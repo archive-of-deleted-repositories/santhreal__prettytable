@@ -563,6 +563,11 @@ class TestBasic:
         with pytest.raises(ValueError):
             table.add_row(["Geelong", 1, 308915, 123.1, 1])
 
+    def test_add_row_empty_without_fields(self) -> None:
+        table = PrettyTable()
+        with pytest.raises(ValueError, match="Can't infer field names from an empty row"):
+            table.add_row([])
+
     def test_add_column_invalid(self, city_data: PrettyTable) -> None:
         with pytest.raises(ValueError):
             city_data.add_column("City name", ["Geelong", 2, 3, 4, 5, 6, 7, 8, 9, 10])
